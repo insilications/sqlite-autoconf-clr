@@ -5647,6 +5647,7 @@ static int fillInUnixFile(
   pNew->pVfs = pVfs;
   pNew->zPath = zFilename;
   pNew->ctrlFlags = (u8)ctrlFlags;
+  pNew->szChunk = 512 * 1024;
 #if SQLITE_MAX_MMAP_SIZE>0
   pNew->mmapSizeMax = sqlite3GlobalConfig.szMmap;
 #endif
