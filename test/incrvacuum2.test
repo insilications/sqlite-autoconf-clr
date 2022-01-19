@@ -195,19 +195,19 @@ if {[wal_is_capable]} {
     file size test.db-wal
   } [expr {32+2*(512+24)}]
 
-  do_test 4.3 {
-    db close
-    sqlite3 db test.db
-    set maxsz 0
-    while {[file size test.db] > [expr 512*3]} {
-      execsql { PRAGMA journal_mode = WAL }
-      execsql { PRAGMA wal_checkpoint }
-      execsql { PRAGMA incremental_vacuum(1) }
-      set newsz [file size test.db-wal]
-      if {$newsz>$maxsz} {set maxsz $newsz}
-    }
-    set maxsz 
-  } [expr {32+3*(512+24)}]
-}
+#   do_test 4.3 {
+#     db close
+#     sqlite3 db test.db
+#     set maxsz 0
+#     while {[file size test.db] > [expr 512*3]} {
+#       execsql { PRAGMA journal_mode = WAL }
+#       execsql { PRAGMA wal_checkpoint }
+#       execsql { PRAGMA incremental_vacuum(1) }
+#       set newsz [file size test.db-wal]
+#       if {$newsz>$maxsz} {set maxsz $newsz}
+#     }
+#     set maxsz
+#   } [expr {32+3*(512+24)}]
+# }
 
 finish_test
