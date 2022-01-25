@@ -4823,6 +4823,7 @@ int sqlite3PagerOpen(
   pPager->fd = (sqlite3_file*)pPtr;       pPtr += ROUND8(pVfs->szOsFile);
   pPager->sjfd = (sqlite3_file*)pPtr;     pPtr += journalFileSize;
   pPager->jfd =  (sqlite3_file*)pPtr;     pPtr += journalFileSize;
+  sqlite3PagerSetJournalMode(pPager, PAGER_JOURNALMODE_WAL);
   assert( EIGHT_BYTE_ALIGNMENT(pPager->jfd) );
   memcpy(pPtr, &pPager, sizeof(pPager));  pPtr += sizeof(pPager);
 
