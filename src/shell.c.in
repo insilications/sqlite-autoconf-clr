@@ -4761,6 +4761,7 @@ static void open_db(ShellState *p, int openFlags){
       }
       exit(1);
     }
+    sqlite3_exec(p->db, "PRAGMA journal_mode=WAL;", 0, 0, NULL);
 #ifndef SQLITE_OMIT_LOAD_EXTENSION
     sqlite3_enable_load_extension(p->db, 1);
 #endif
