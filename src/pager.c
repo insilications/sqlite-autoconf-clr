@@ -4951,6 +4951,7 @@ act_like_temp_file:
     rc = sqlite3PagerSetPagesize(pPager, &szPageDflt, -1);
     testcase( rc!=SQLITE_OK );
   }
+  sqlite3PagerSetJournalMode(pPager, PAGER_JOURNALMODE_WAL);
 
   /* Initialize the PCache object. */
   if( rc==SQLITE_OK ){
