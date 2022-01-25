@@ -432,7 +432,7 @@ TESTSRC = \
   $(TOP)/ext/fts3/fts3_term.c \
   $(TOP)/ext/fts3/fts3_test.c  \
   $(TOP)/ext/session/test_session.c \
-  $(TOP)/ext/rbu/test_rbu.c 
+  $(TOP)/ext/rbu/test_rbu.c
 
 # Statically linked extensions
 #
@@ -654,9 +654,9 @@ libtclsqlite3.la:	tclsqlite.lo libsqlite3.la
 		-version-info "8:6:8" \
 		-avoid-version
 
-sqlite3$(TEXE):	shell.c sqlite3.c
+sqlite3$(TEXE):	shell.c sqlite3.c libsqlite3.la
 	$(LTLINK) $(READLINE_FLAGS) $(SHELL_OPT) -o $@ \
-		shell.c sqlite3.c \
+		shell.c libsqlite3.la \
 		$(LIBREADLINE) $(TLIBS) -rpath "$(libdir)"
 
 sqldiff$(TEXE):	$(TOP)/tool/sqldiff.c sqlite3.lo sqlite3.h
@@ -1380,7 +1380,7 @@ wordcount$(TEXE):	$(TOP)/test/wordcount.c sqlite3.lo
 	$(LTLINK) -o $@ $(TOP)/test/wordcount.c sqlite3.lo $(TLIBS)
 
 speedtest1$(TEXE):	$(TOP)/test/speedtest1.c sqlite3.c
-	$(LTLINK) $(ST_OPT) -o $@ $(TOP)/test/speedtest1.c sqlite3.c $(TLIBS)
+	$(LTLINK) $(ST_OPT) -o $@ $(TOP)/test/speedtest1.c libsqlite3.la $(TLIBS)
 
 startup$(TEXE):	$(TOP)/test/startup.c sqlite3.c
 	$(CC) -Os -g -DSQLITE_THREADSAFE=0 -o $@ $(TOP)/test/startup.c sqlite3.c $(TLIBS)
